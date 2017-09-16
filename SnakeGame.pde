@@ -3,7 +3,7 @@ static boolean isRunning;
 
 void setup() {
   size(600,600);
-  frameRate(10);
+  frameRate(8);
   isRunning = false;
   grid = new Grid();
   grid.initGrid();

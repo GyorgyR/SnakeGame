@@ -11,18 +11,18 @@ class Grid {
         theGrid[xPar][yPar].draw();
       }
       
-    snake = new Snake(this, rectSize);
+    snake = new Snake(this);
     snake.initSnake(width / rectSize / 2,height / rectSize / 2);
     
     placeFood();
   } //initGrid
   
-  void setToSnake(int x, int y) {
-    theGrid[x][y].setType("SNAKE");
+  void setToSnake(Position pos) {
+    theGrid[pos.x][pos.y].setType("SNAKE");
   }
   
-  void setToBG(int x, int y) {
-    theGrid[x][y].setType("BG");
+  void setToBG(Position pos) {
+    theGrid[pos.x][pos.y].setType("BG");
   }
   
   void setToFood(int x, int y) {
@@ -41,37 +41,34 @@ class Grid {
       }
   }
   
-  boolean isFoodTile(int x, int y) {
-    return theGrid[x][y].type == "FOOD";
+  boolean isFoodTile(Position pos) {
+    return theGrid[pos.x][pos.y].type == "FOOD";
   }
   
   void placeFood() {
-    int x = int(random(1, width / rectSize - 2));
-    int y = int(random(1, height / rectSize - 2));
+    int x;
+    int y;
+    do {
+      x = int(random(1, width / rectSize - 2));
+      y = int(random(1, height / rectSize - 2));
+    } while(theGrid[x][y].type != "BG");
     
     setToFood(x,y);
+    println("x: "+x+", y: "+y);
   }
   
-  boolean isClear(int x, int y) {
+  boolean isClear(Position pos) {
     boolean clear = true;
     
-    if(x <= 0 || x >= width / rectSize -1 || y <= 0 || y >= height / rectSize -1)
+    if(pos.x <= -1 || pos.x >= width / rectSize || pos.y <= -1 || pos.y >= height / rectSize)
       clear = false;
     else
-      clear = theGrid[x][y].type != "SNAKE";
+      clear = theGrid[pos.x][pos.y].type == "BG" || theGrid[pos.x][pos.y].type == "FOOD";
     
     return clear;
   }
   
-  boolean isFood(int x, int y) {
-    return theGrid[x][y].type == "FOOD";
-  }
-  
-  void moveSnakeParts(int xChange, int yChange) {
-    for(int x = 0; x < width / rectSize; x++)
-      for(int y = 0; y < height / rectSize; y++)
-        if(theGrid[x][y].type == "SNAKE") {
-          setToSnake(x + xChange, y + yChange);
-        }
+  boolean isFood(Position pos) {
+    return theGrid[pos.x][pos.y].type == "FOOD";
   }
 }
