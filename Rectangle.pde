@@ -18,11 +18,15 @@ class Rectangle {
      else if(type == "SNAKE")
        fill(230);
      else if(type == "FOOD")
-       fill(30,60,80);
+       fill(160,70,210);
      else
        println(type);
        
      noStroke();
      rect(x,y,size,size); 
+   } //draw
+   
+   void setType(String _type) {
+     type = _type;
    }
 }
