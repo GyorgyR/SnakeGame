@@ -54,7 +54,6 @@ class Grid {
     } while(theGrid[x][y].type != "BG");
     
     setToFood(x,y);
-    println("x: "+x+", y: "+y);
   }
   
   boolean isClear(Position pos) {

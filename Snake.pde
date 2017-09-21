@@ -3,6 +3,7 @@ class Snake {
   Grid grid;
   int size = 2;
   List pos;
+  int score = 0;
   
   
   Snake(Grid _grid) {
@@ -53,6 +54,8 @@ class Snake {
       }
       else {
         size++;
+        score++;
+        println("Score: " + score);
         pos.add(new Position(prevTailPos));
         grid.placeFood();
       }
@@ -66,6 +69,7 @@ class Snake {
   void die() {
     SnakeGame.isRunning = false;
     println("YOU DIED!");
+    println("Score: " + score);
     //println("x: "+pos.get(0).x + ", y: "+pos.get(0).y);
   }
   
