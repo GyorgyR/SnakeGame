@@ -1,12 +1,14 @@
 Grid grid;
 static boolean isRunning;
+int fRate = 8;
 
 void setup() {
   size(600,640);
-  frameRate(8);
+  frameRate(fRate);
   isRunning = false;
   grid = new Grid();
   grid.initGrid();
+  grid.message("Press s to start!");
 }
 
 void draw() {
@@ -31,10 +33,17 @@ void keyPressed() {
   }
   else if(key == 's') {
     grid.message("START!");
-    println("START!");
     isRunning = true;
   }
   else if(key == 'r') {
     setup();
+  }
+  
+  else if(key == 'q') {
+    System.exit(0);
+  }
+  
+  else if(key == 'p') {
+    isRunning = !isRunning;
   }
 }
