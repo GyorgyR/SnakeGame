@@ -1,18 +1,22 @@
 class Grid {
   Snake snake;
   int rectSize = 20;
-  Rectangle[][] theGrid = new Rectangle[int(width/rectSize)][int(height/rectSize)];
+  int xTileNo = int(width/rectSize);
+  int yTileNo = int((height-40)/rectSize);
+  Rectangle[][] theGrid = new Rectangle[xTileNo][yTileNo];
+  TextManager tm = new TextManager();
+  
   void initGrid() {
     fill(0);
     
-    for(int xPar = 0; xPar < width/rectSize; xPar++)
-      for(int yPar = 0; yPar < height/rectSize; yPar++) {
-        theGrid[xPar][yPar] = new Rectangle(xPar*rectSize, yPar*rectSize, rectSize, "BG");
+    for(int xPar = 0; xPar < xTileNo; xPar++)
+      for(int yPar = 0; yPar < yTileNo; yPar++) {
+        theGrid[xPar][yPar] = new Rectangle(xPar*rectSize, yPar*rectSize+40, rectSize, "BG");
         theGrid[xPar][yPar].draw();
       }
       
     snake = new Snake(this);
-    snake.initSnake(width / rectSize / 2,height / rectSize / 2);
+    snake.initSnake(xTileNo / 2,yTileNo / 2);
     
     placeFood();
   } //initGrid
@@ -35,8 +39,8 @@ class Grid {
   
   void update() {
     snake.update();
-    for(int xPar = 0; xPar < width/rectSize; xPar++)
-      for(int yPar = 0; yPar < height/rectSize; yPar++) {
+    for(int xPar = 0; xPar < xTileNo; xPar++)
+      for(int yPar = 0; yPar < yTileNo; yPar++) {
         theGrid[xPar][yPar].draw();
       }
   }
@@ -49,8 +53,8 @@ class Grid {
     int x;
     int y;
     do {
-      x = int(random(1, width / rectSize - 2));
-      y = int(random(1, height / rectSize - 2));
+      x = int(random(1, xTileNo - 2));
+      y = int(random(1, yTileNo - 2));
     } while(theGrid[x][y].type != "BG");
     
     setToFood(x,y);
@@ -59,7 +63,7 @@ class Grid {
   boolean isClear(Position pos) {
     boolean clear = true;
     
-    if(pos.x <= -1 || pos.x >= width / rectSize || pos.y <= -1 || pos.y >= height / rectSize)
+    if(pos.x < 0 || pos.x >= xTileNo || pos.y < 0 || pos.y >= yTileNo)
       clear = false;
     else
       clear = theGrid[pos.x][pos.y].type == "BG" || theGrid[pos.x][pos.y].type == "FOOD";
@@ -69,5 +73,13 @@ class Grid {
   
   boolean isFood(Position pos) {
     return theGrid[pos.x][pos.y].type == "FOOD";
+  }
+  
+  void message(String message) {
+    tm.message(message);
+  }
+  
+  void score(int score) {
+    tm.updateScore(score);
   }
 }

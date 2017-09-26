@@ -2,7 +2,7 @@ Grid grid;
 static boolean isRunning;
 
 void setup() {
-  size(600,600);
+  size(600,640);
   frameRate(8);
   isRunning = false;
   grid = new Grid();
@@ -30,6 +30,7 @@ void keyPressed() {
       grid.setSnakeDir("RIGHT");
   }
   else if(key == 's') {
+    grid.message("START!");
     println("START!");
     isRunning = true;
   }

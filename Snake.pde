@@ -55,6 +55,7 @@ class Snake {
       else {
         size++;
         score++;
+        grid.score(score);
         println("Score: " + score);
         pos.add(new Position(prevTailPos));
         grid.placeFood();
@@ -79,25 +80,21 @@ class Snake {
       switch(direction) {
        case "LEFT":
          if(d == "RIGHT") {
-           println("Can't do that!");
            canChange = false;
          }
          break;
        case "RIGHT":
          if(d == "LEFT") {
-           println("Can't do that!");
            canChange = false;
          }
          break;
        case "UP":
          if(d == "DOWN") {
-           println("Can't do that!");
            canChange = false;
          }
          break;
        case "DOWN":
          if(d == "UP") {
-           println("Can't do that!");
            canChange = false;
          }
          break;
@@ -105,6 +102,8 @@ class Snake {
       }
       if(canChange)
         direction = d;
+      else
+        grid.message("Can't do that!");
     }
   }
   

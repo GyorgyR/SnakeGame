@@ -19,6 +19,8 @@ class Rectangle {
        fill(230);
      else if(type == "FOOD")
        fill(160,70,210);
+     else if(type == "OBSTACLE")
+       fill(80,160,90);
      else
        println(type);
        
