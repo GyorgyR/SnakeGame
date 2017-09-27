@@ -56,7 +56,7 @@ class TextManager {
     textSize(24);
     String description =
     "After every 10th score there\n"
-    +" will be a new obstacle.\n"
+    +" will be a new obstacle (green tile).\n"
     +"After every 20th score the game\n"
     +"will be faster";
     

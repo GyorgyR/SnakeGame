@@ -1,6 +1,6 @@
 Grid grid;
 static boolean isRunning;
-int fRate = 8;
+int fRate = 6;
 
 void setup() {
   size(600,640);
